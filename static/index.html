@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en" ng-app="nmeter">
+<head>
+  <meta charset="utf-8">
+  <title>My AngularJS App</title>
+  <link rel="stylesheet" href="css/app.css"/>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+</head>
+<style>
+html{
+height: 100%;
+width:100%;  
+}
+body{
+height: 100%;
+background: #262626;
+width: 1300px;
+margin-left: auto;
+margin-right: auto;
+font-family: Helvetica, Arial;
+font-size: 12px;
+color: #b1d81c;
+}
+  .graphs {
+    background: #1A1A1A; padding: 50px;  border-radius: 6px;
+    margin-left: auto; margin-right: auto;
+    position: relative;
+    height: 100%;
+  }
+  .graph{
+    margin-bottom: 20px;
+    border-radius: 9px;
+    border-top: 1px #000 solid;
+    border-right: 1px #222 solid;
+    border-bottom: 1px #222 solid;
+    border-left: 1px #222 solid;
+  }
+
+  .test-options, .test-panel{
+    margin: 0 0 10px 0;
+    padding: 0px;
+    max-width: 600px;
+    min-width: 300px;
+    background: #181718;
+    background: -moz-linear-gradient(top, #000 0%, #111 5%, #181718 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#000), color-stop(5%,#111), color-stop(100%,#181718));
+    background: -webkit-linear-gradient(top, #000 0%, #111 0%, #181718 100%);
+    background: -o-linear-gradient(top, #000 0%, #111 0%, #181718 100%);
+    background: -ms-linear-gradient(top, #000 0%, #111 0%, #181718 100%);
+    background: linear-gradient(top, #000 0%, #111 0%, #181718 100%);
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    -o-border-radius: 9px;
+    border-radius: 9px;
+    overflow: hidden;
+    border-top: 1px #000 solid;
+    border-right: 1px #222 solid;
+    border-bottom: 1px #222 solid;
+    border-left: 1px #222 solid;
+    vertical-align: middle;
+}
+
+.table-header {
+  font-size: 18px;
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 2px solid skyblue;
+}
+
+.white_highlight {
+  color: #fff;
+}
+.test-panel{
+      max-width: inherit;
+    min-width: inherit;
+  width: 555px;
+height: 100%;
+position: relative;
+display: inline-block;
+
+}
+
+.cont {
+  margin-top: 3px;
+  height: 100%;
+  overflow: hidden;
+overflow-y: auto;
+padding-bottom: 25px;
+}
+
+.test-input{
+    margin: 0 0 10px 0;
+    padding: 6px;
+    background: #1a1a1a;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    -o-border-radius: 9px;
+    border-radius: 9px;
+    overflow: hidden;
+    border-top: 1px #000 solid;
+    border-right: 1px #222 solid;
+    border-bottom: 1px #222 solid;
+    border-left: 1px #222 solid;
+    vertical-align: middle;
+    text-align: center;
+    color: whitesmoke;
+    font-size: 15px;
+    right: 0;
+    margin-right: 7px;
+    margin-left: 7px;
+
+}
+
+textarea.test-input {
+  height:300px;
+  resize:none;
+}
+.input-label{
+  display: inline-block;
+  font-size: 16px;
+  height: 32px;
+line-height: 2;
+}
+
+.test-panel ul li{
+  margin-bottom: 6px;
+}
+
+
+
+.btn_run {
+  background: #589fca;
+  background: -moz-linear-gradient(top, #589fca 0%, #3280ba 8%, #3280ba 20%, #1f5c9a 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#589fca), color-stop(8%,#3280ba), color-stop(20%,#3280ba), color-stop(100%,#1f5c9a));
+  background: -webkit-linear-gradient(top, #589fca 0%,#3280ba 8%,#3280ba 20%,#1f5c9a 100%);
+  background: -o-linear-gradient(top, #589fca 0%,#3280ba 8%,#3280ba 20%,#1f5c9a 100%);
+  background: -ms-linear-gradient(top, #589fca 0%,#3280ba 8%,#3280ba 20%,#1f5c9a 100%);
+  background: linear-gradient(to bottom, #589fca 0%,#3280ba 8%,#3280ba 20%,#1f5c9a 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#589fca', endColorstr='#1f5c9a',GradientType=0 );
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  border: 2px #151515 solid;
+  -moz-box-shadow: 0px 0px 5px #000;
+  -webkit-box-shadow: 0px 0px 5px #000;
+  -o-box-shadow: 0px 0px 5px #000;
+  box-shadow: 0px 0px 5px #000;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-shadow: 0 1px #383838;
+  font-size: 0.8em;
+  color: #fff !important;
+  text-align: center;
+  width: 40px;
+  margin-right: auto;
+  left: -24px;
+position: relative;
+top: -5px;
+}
+
+.btn_save {
+  background: transparent;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  border: 2px #151515 solid;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 16px;
+  color: #fff !important;
+  text-align: center;
+  width: 24px;
+  margin-right: auto;
+  position: relative;
+  top: -5px;
+}
+
+
+.action-button {
+cursor: pointer;
+}
+
+.disabled {
+  opacity:0.5;
+}
+
+.nav-tabs li{
+  cursor: pointer;
+}
+
+ul li {
+  position: relative;
+}
+
+ul li input[type=checkbox]{
+  position: relative;
+  margin-left: 142px;
+}
+th {
+text-align: center;
+}
+
+table{
+  margin-left: 20px;
+}
+
+.accounts-table-header-row{
+  color:#fff;
+  width: 187px;
+}
+
+</style>
+
+<body>
+  <div class="graphs" ng-controller="LatencyCtrl">
+    <ul class="nav nav-tabs">
+      <li ng-repeat="environment in environments" ng-click="setActiveEnv(environment)" ng-class="(environment.active == true)?'active':'';"><a>{{environment.env}}</a></li>
+    </ul>
+<!--     <div class="test-options">
+      <h2 class="test-progress"><span class="white_highlight">{{hpscount}} Hits</span> 
+         with <span class="white_highlight">{{hpserrorcount}} Errors </span><span class="small_tips"> {{userMessage()}}</span</h2>
+    </div> -->
+    <div ng-show="environment.active == true" ng-repeat="environment in environments" class="test-panel" style=" width: 620px; ">
+      <div class="title">Accounts</div>
+      <table>
+        <thead>
+          <tr class="table-header">
+            <th class="accounts-table-header-row">Username</th>
+            <th class="accounts-table-header-row">Role</th>
+            <th class="accounts-table-header-row">Password</th>
+            <th></th>
+          </tr>
+        </thead>
+      </table>
+      <div class="cont">
+        <table>
+          <tbody class="cont">
+            <tr ng-repeat="account in accounts | filter:environment.env">
+              <td><input type="text" class="test-input" ng-model="account.user" ng-change="compareAccount(account)"></td>
+              <td><input type="text" class="test-input" ng-model="account.role" ng-change="compareAccount(account)"></td>
+              <td><input type="password" class="test-input" ng-model="account.pass" ng-change="compareAccount(account)"></td>
+              <td><div ng-show="account.change == true" class="btn_save action-button" ng-click="$event.stopPropagation(); saveAccount(account)"><span class="glyphicon glyphicon-floppy-disk"></span></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div ng-show="environment.active == true" ng-repeat="environment in environments" class="test-panel" style=" width: 300px; ">
+      <div class="title">Versions</div>
+      <table>
+        <thead>
+          <tr class="table-header">
+            <th class="accounts-table-header-row">Name</th>
+            <th class="accounts-table-header-row">Enabled</th>
+            <th></th>
+          </tr>
+        </thead>
+      </table>
+
+      <div class="cont">
+        <table>
+          <tbody>
+            <tr ng-repeat="version in versions | filter:environment.env">
+              <td><input type="text" class="test-input" ng-model="version.name" ng-change="compareVersion(version)"></td>
+              <td><input type="checkbox" class="test-input" ng-model="version.enabled" ng-change="compareVersion(version)" style=" position: relative; top: -9px; left: 16px; "></td>
+              <td><div ng-show="version.change == true" class="btn_save action-button" ng-click="$event.stopPropagation(); saveVersion(version)" ><span class="glyphicon glyphicon-floppy-disk"></span></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular/angular-route.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/directives.js"></script>
+  
+  <script src="http://code.highcharts.com/stock/highstock.js"></script>
+  <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+
+</body>
+</html>
