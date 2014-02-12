@@ -13,40 +13,10 @@
     <ul class="nav nav-tabs">
       <li ng-repeat="environment in environments" ng-click="setActiveEnv(environment)" ng-class="(environment.active == true)?'active':'';"><a>{{environment.env}}</a></li>
     </ul>
-    <div ng-show="environment.active == true" ng-repeat="environment in environments" class="test-panel">
-      <div class="title" ng-init="expand=true" ng-click="expand=(!expand)">Accounts</div>
-      <div class="table-container" ng-class="(expand== true)?'animated':'';">
-        <table style=" width: 649px; /* margin-left: 0px; */ ">
-          <thead>
-            <tr class="table-header">
-              <th></th>
-              <th class="accounts-table-header-row">Username</th>
-              <th class="accounts-table-header-row">Role</th>
-              <th class="accounts-table-header-row">Password</th>
-              <th></th>
-            </tr>
-          </thead>
-        </table>
-      <div class="cont">
-        <table>
-          <tbody class="cont">
-            <tr ng-repeat="account in accounts | filter:environment.env">
-              <td><div  class="btn btn-danger btn-xs btn-remove" ng-click="$event.stopPropagation(); removeAccount(account)"><i class="fa fa-trash-o"></i></div></td>
-              <td><input type="text" class="test-input" ng-model="account.user" ng-change="compareAccount(account)"></td>
-              <td><input type="text" class="test-input" ng-model="account.role" ng-change="compareAccount(account)"></td>
-              <td><input type="password" class="test-input" ng-model="account.pass" ng-change="compareAccount(account)"></td>
-              <td><div ng-show="account.change == true" class="btn_save action-button" ng-click="$event.stopPropagation(); saveAccount(account)"><i class="fa fa-floppy-o"></i></div></td>
-            </tr>
-          </tbody>
-        </table>
-          <div class="add-new" ng-click="addAccount(environment.env)"><i class="fa fa-plus"></i></div>
-      </div>
-    </div>
-    </div>
 
 
-    <div ng-show="environment.active == true" ng-repeat="environment in environments" class="test-panel" >
-      <div class="title" ng-click="expand=(!expand)">Versions</div>
+<div ng-show="environment.active == true" ng-repeat="environment in environments" class="test-panel" >
+      <div class="title" ng-init="expand=true" ng-click="expand=(!expand)">Versions</div>
       <div class="table-container" ng-class="(expand== true)?'animated':'';">
       <table>
         <thead>
@@ -72,10 +42,46 @@
             </tr>
           </tbody>
         </table>
-        <div class="add-new" ng-click="addVersion(environment.env)"><i class="fa fa-plus"></i></div>
+        <div class="add-new" ng-click="addVersion(environment.env)"><!-- <i class="fa fa-plus"></i> -->Add New Version</div>
       </div>
     </div>
     </div>
+
+
+    
+    <div ng-show="environment.active == true" ng-repeat="environment in environments" class="test-panel">
+      <div class="title" ng-click="expand=(!expand)">Accounts</div>
+      <div class="table-container" ng-class="(expand== true)?'animated':'';">
+        <table style=" width: 649px; /* margin-left: 0px; */ ">
+          <thead>
+            <tr class="table-header">
+              <th></th>
+              <th class="accounts-table-header-row">Username</th>
+              <th class="accounts-table-header-row">Role</th>
+              <th class="accounts-table-header-row">Password</th>
+              <th></th>
+            </tr>
+          </thead>
+        </table>
+      <div class="cont">
+        <table>
+          <tbody class="cont">
+            <tr ng-repeat="account in accounts | filter:environment.env">
+              <td><div  class="btn btn-danger btn-xs btn-remove" ng-click="$event.stopPropagation(); removeAccount(account)"><i class="fa fa-trash-o"></i></div></td>
+              <td><input type="text" class="test-input" ng-model="account.user" ng-change="compareAccount(account)"></td>
+              <td><input type="text" class="test-input" ng-model="account.role" ng-change="compareAccount(account)"></td>
+              <td><input type="password" class="test-input" ng-model="account.pass" ng-change="compareAccount(account)"></td>
+              <td><div ng-show="account.change == true" class="btn_save action-button" ng-click="$event.stopPropagation(); saveAccount(account)"><i class="fa fa-floppy-o"></i></div></td>
+            </tr>
+          </tbody>
+        </table>
+          <div class="add-new" ng-click="addAccount(environment.env)"><!-- <i class="fa fa-plus"></i> -->Add New Account</div>
+      </div>
+    </div>
+    </div>
+
+
+    
 
     <div ng-show="environment.active == true" ng-repeat="environment in environments" class="test-panel">
       <div class="title" ng-click="expand=(!expand)">Properties</div>
@@ -102,7 +108,7 @@
             </tr>
           </tbody>
         </table>
-        <div class="add-new" ng-click="addProperty(environment.env)"><i class="fa fa-plus"></i></div>
+        <div class="add-new" ng-click="addProperty(environment.env)"><!-- <i class="fa fa-plus"></i> -->Add New Property</div>
       </div>
     </div>
     </div>
