@@ -61,9 +61,8 @@ module.exports = {
     },
 
     setAccount: function(account, callback){
-
         if(typeof account.id == 'undefined'){
-           connection.query('INSERT INTO account(user, pass, role, env) values(?,?,?,?);',[account.user, account,pass, account.role, account.env], function(err, rows, fields) {
+           connection.query('INSERT INTO account(user, pass, role, env) values(?,?,?,?);',[account.user, account.pass, account.role, account.env], function(err, rows, fields) {
                 if(err){console.log(err);return false;}
                 callback(rows)
 
@@ -81,20 +80,78 @@ module.exports = {
     setVersion: function(version, callback){
 
         if(typeof version.id == 'undefined'){
-           connection.query('INSERT INTO muleversions(name, enabled, env) values(?,?,?);',[version.name, version.enabled, version.env], function(err, rows, fields) {
+           connection.query('INSERT INTO muleversions(name, enabled, env, version) values(?,?,?,?);',[version.name, version.enabled, version.env, version.version], function(err, rows, fields) {
                 if(err){console.log(err);return false;}
                 callback(rows)
 
             });
         }else{
-            connection.query('update muleversions set name =?, enabled = ? WHERE id =  ?;',[version.name, version.enabled, version.id], function(err, rows, fields) {
+            connection.query('update muleversions set name =?, enabled = ?, version = ? WHERE id =  ?;',[version.name, version.enabled, version.version, version.id], function(err, rows, fields) {
                 if(err){console.log(err);return false;}
                 callback(rows)
 
             });
         }
 
-    }
+    },
+
+    getProperties: function(callback){
+
+        connection.query('select * from props;', function(err, rows, fields) {
+            if(err){console.log(err);return false;}
+            callback(rows)
+
+        });
+
+    },
+    
+    setProperty: function(prop, callback){
+        console.log(prop)
+        if(typeof prop.id == 'undefined'){
+           connection.query('INSERT INTO props(`key`, value, env) values(?,?,?);',[prop.key, prop.value, prop.env], function(err, rows, fields) {
+                if(err){console.log(err);return false;}
+                callback(rows)
+
+            });
+        }else{
+            connection.query('update props set `key` =?, value = ?, env = ? WHERE id = ?;',[prop.key, prop.value, prop.env, prop.id], function(err, rows, fields) {
+                if(err){console.log(err);return false;}
+                callback(rows)
+
+            });
+        }
+
+    },
+
+    removeAccount: function(id, callback){
+
+        connection.query('delete from account where id = ?;', [id], function(err, rows, fields) {
+            if(err){console.log(err);return false;}
+            callback(rows)
+
+        });
+
+    },
+
+    removeVersion: function(id, callback){
+
+        connection.query('delete from muleversions where id = ?;', [id], function(err, rows, fields) {
+            if(err){console.log(err);return false;}
+            callback(rows)
+
+        });
+
+    },
+
+    removeProperty: function(id, callback){
+
+        connection.query('delete from props where id = ?;', [id], function(err, rows, fields) {
+            if(err){console.log(err);return false;}
+            callback(rows)
+
+        });
+
+    },
 
 
 

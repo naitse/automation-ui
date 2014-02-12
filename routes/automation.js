@@ -30,3 +30,33 @@ exports.setVersion = function(req,res){
         res.json(rows);
     })
 }
+
+exports.getProperties = function(req, res){
+    dao.getProperties(function(rows){
+        res.json(rows);
+    })
+}
+
+exports.setProperty = function(req,res){
+    dao.setProperty(req.body, function(rows){
+        res.json(rows);
+    })
+}
+
+exports.removeAccount = function(req,res){
+    dao.removeAccount(req.params['id'], function(rows){
+        res.json(rows);
+    })
+}
+
+exports.removeVersion = function(req,res){
+    dao.removeVersion(req.params['id'], function(rows){
+        res.json(rows);
+    })
+}
+
+exports.removeProperty = function(req,res){
+    dao.removeProperty(req.params['id'], function(rows){
+        res.json(rows);
+    })
+}

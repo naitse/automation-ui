@@ -32,11 +32,16 @@ app.configure(function(){
     //app.use(express.static(__dirname + '/static'));
 });
 
-app.get('/api/accounts', automation.accounts);
 app.get('/api/environments', automation.environments);
+app.get('/api/accounts', automation.accounts);
 app.post('/api/accounts', automation.setAccount);
+app.delete('/api/accounts/:id', automation.removeAccount);
 app.get('/api/versions', automation.getVersions);
 app.post('/api/versions', automation.setVersion);
+app.delete('/api/versions/:id', automation.removeVersion);
+app.get('/api/properties', automation.getProperties);
+app.post('/api/properties', automation.setProperty);
+app.delete('/api/properties/:id', automation.removeProperty);
 
 
 
